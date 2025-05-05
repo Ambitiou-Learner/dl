@@ -1,0 +1,5 @@
+def McCullochPittsNeuronOR(inputs):
+  if 1 in inputs: # Check if there is even one "1" in inputs
+    return 1
+  else:
+    return 0
