@@ -1,0 +1,18 @@
+from gensim.models import Word2Vec
+from datasets import load_dataset
+# Load IMDb dataset (train split)
+dataset = load_dataset("imdb")
+sample_reviews = dataset['train']['text'][:500] # Using first 500 reviews for␣
+↪training
+# Clean all reviews using the clean_text function
+cleaned_reviews = [clean_text(text) for text in sample_reviews]
+# Train Word2Vec model
+w2v_model = Word2Vec(sentences=cleaned_reviews, vector_size=100, window=5,␣
+↪min_count=5, workers=4)
+# Display most similar words to a given word (e.g., "movie")
+word = "movie"
+if word in w2v_model.wv:
+print(f"Words similar to '{word}':")
+print(w2v_model.wv.most_similar(word))
+else:
+print(f"'{word}' not found in vocabulary.")
