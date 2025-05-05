@@ -1,0 +1,17 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+sentences = [
+"The quick brown fox jumped over the lazy dog.",
+"The dog chased the fox around the yard.",
+"A fox is a cunning animal."
+]
+# Initialize the TfidfVectorizer
+vectorizer = TfidfVectorizer(max_features=5000)
+# Fit and transform the sentences into TF-IDF vectors
+tfidf_matrix = vectorizer.fit_transform(sentences)
+# Show the top 10 feature names (words)
+print("TF-IDF Feature Names (sample):", vectorizer.get_feature_names_out()[:10])
+# Show the shape of the TF-IDF matrix (rows = number of sentences, columns =␣
+↪number of features/terms)
+print("TF-IDF Matrix Shape:", tfidf_matrix.shape)
+# Optional: Show the TF-IDF values for the first sentence (row 0)
+print("TF-IDF values for the first sentence:", tfidf_matrix[0].toarray())
