@@ -1,0 +1,7 @@
+A0 =   # Input layer
+weights0 = [# Input layer to 1st hidden layer]
+weights1 = [# 1st hidden layer to 2nd hidden layer]
+weights2 = [# 2nd hidden layer to 3rd hidden layer]
+weights3 = [ 0.6, 0.2, 0.7 , 0.4# 3rd hidden layer to output layer
+weights = [weights0, weights1, weights2, weights3]
+bias = [0.2,0.3,0.1,0.4]
