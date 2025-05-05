@@ -1,0 +1,10 @@
+import genism.downloaded as api
+import numpy as np
+print("Loading FastText model...")
+model = api.load('fasttext-wiki-news-subwords-300')
+print("Model loaded successfully!")
+word_a, word_b, word_c = 'delhi', 'india', 'colombo'
+result = model.most_similar(positive=[word_b, word_c], negative=[word_a],␣
+↪topn=1)
+word_d = result[0][0]
+print(f"'{word_a}' : '{word_b}' :: '{word_c}' : '{word_d}'")
