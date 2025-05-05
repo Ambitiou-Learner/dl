@@ -1,0 +1,23 @@
+import numpy as np
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+def softmax(x):
+    stable_x = x - np.max(x)
+    return np.exp(stable_x) / np.sum(np.exp(stable_x))
+# Input layer activations (4 neurons)
+A0 = []
+# Weights from Input layer to 1st hidden layer (4 neurons output, 4 input)
+weights0 = []
+# Weights from 1st hidden layer (4 neurons) to Output layer (2 neurons)
+weights1 = {]
+weights = [weights0, weights1]
+# Biases
+bias = [0.2,0.3]
+# Forward Propagation
+# Layer 1 - Hidden
+Z1 = np.dot(weights[0], A0) + bias[0]
+A1 = sigmoid(Z1)
+# Layer 2 - Output
+Z2 = np.dot(weights[1], A1) + bias[1]
+A2 = softmax(Z2)
+print("Probabilities:", A2)
