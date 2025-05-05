@@ -1,0 +1,21 @@
+ import nltk
+import string
+import re
+from nltk.corpus import stopwords
+# Download stopwords
+# nltk.download('stopwords')
+# Define the function to clean the text
+def clean_text(text):
+# Load stopwords
+stop_words = set(stopwords.words('english'))
+# Convert text to lowercase
+text = text.lower()
+# Remove punctuation using regex
+text = re.sub(f"[{re.escape(string.punctuation)}]", "", text)
+# Tokenize and remove stopwords
+tokens = text.split()
+cleaned_tokens = [word for word in tokens if word not in stop_words]
+return cleaned_tokens
+# Example: Clean a review from the dataset
+sample_text = "This movie was absolutely fantastic! I loved it."
+cleaned_sample = clean_text(sample_text)
