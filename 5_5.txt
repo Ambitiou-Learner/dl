@@ -1,0 +1,7 @@
+# Features and label
+X = df[['age', 'trestbps', 'chol']]  # age, blood pressure, cholesterol
+y = df['target']  # 0 = No heart disease, 1 = Heart disease
+
+# Split into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
