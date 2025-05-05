@@ -1,0 +1,21 @@
+import numpy as np
+
+# AND gate data
+X = np.array([[0, 0],
+              [0, 1],
+              [1, 0],
+              [1, 1]])
+Y = np.array([0, 0, 0, 1])
+
+# Initialize weights and bias
+weights = np.array([0.5, 0.5])
+bias = -0.7
+
+# Perceptron function
+def step_function(x):
+    return 1 if x > 0 else 0
+
+# Prediction
+for x in X:
+    output = np.dot(weights, x) + bias
+    print(f"{x} => {step_function(output)}")
