@@ -1,0 +1,9 @@
+import gensim.downloader as api
+print("Loading FastText model...")
+model = api.load('fasttext-wiki-news-subwords-300') # ~1GB
+print("Model loaded successfully!")
+input_word = 'paris'
+similar_words = model.most_similar(input_word, topn=7)
+print(f"Top 7 words similar to '{input_word}':")
+for word in similar_words:
+print(word)
