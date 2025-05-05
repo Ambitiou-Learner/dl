@@ -1,0 +1,13 @@
+# Tokenize the text (split the text into words)
+words = word_tokenize(text_no_punctuation)
+
+# Remove stopwords
+stop_words = set(stopwords.words('english'))
+filtered_words = [word for word in words if word.lower() not in stop_words]
+
+# Join the words back into a single string
+cleaned_text = ' '.join(filtered_words)
+
+# Print the cleaned text
+print("Original Text: ", text)
+print("Cleaned Text: ", cleaned_text)
