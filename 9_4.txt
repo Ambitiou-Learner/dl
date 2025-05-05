@@ -1,0 +1,13 @@
+# Convert BGR to RGB for proper color display in matplotlib
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+
+# Plot
+plt.imshow(image_rgb) # Original
+plt.show()
+
+plt.imshow(gray,cmap='gray')      # grayscale
+plt.show()
+
+plt.imshow(filtered)  # filtered
+plt.show()
