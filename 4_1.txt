@@ -1,0 +1,6 @@
+# Imports
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate Dataset
+input_1 = np.random.randint(-20,20,1000)
