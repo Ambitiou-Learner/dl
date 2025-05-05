@@ -1,0 +1,4 @@
+inputs = [0,0,1,1,1]
+threshold = 2
+
+McCullochPittsNeuron(inputs,threshold)
