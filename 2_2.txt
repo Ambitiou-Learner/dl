@@ -1,0 +1,8 @@
+inputs = list(map(int, input("Enter binary values: \n[cough, high temprature, body pain] : ").split()))
+threshold = 2
+
+result = McCullochPitts(inputs, threshold)
+if result == 0:
+    print("No Fever")
+else:
+    print("Has Fever")
