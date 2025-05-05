@@ -1,0 +1,18 @@
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
+import pandas as pd
+data = pd.read_csv('house_prices.csv')
+data.head(3)
+data.describe()
+data.info()
+X = data[['square_footage', 'num_bedrooms', 'age_of_house']].values
+y = data['house_price'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,␣
+↪random_state=42)
+model = tf.keras.Sequential([
+tf.keras.layers.Dense(64, activation='relu', input_shape=(3,)), # Input␣
+↪layer with 3 features
+tf.keras.layers.Dense(32, activation='relu'), # Hidden layer
+tf.keras.layers.Dense(1) # Output layer for regression
+])
+model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])
