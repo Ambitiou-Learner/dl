@@ -1,0 +1,8 @@
+# Laplacian-like filter
+filter = [[0, -1, 0],
+          [-1, 4, -1],
+          [0, -1, 0]]
+
+def apply_filter(image, filter):
+    filtered_image = scipy.signal.convolve2d(image, filter, mode='valid')
+    return np.clip(filtered_image, 0, 255).astype(np.uint8)
