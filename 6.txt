@@ -1,0 +1,18 @@
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+# Generate Data
+x = np.linspace(0, 10, 100)
+y = 2 * x + 1 + np.random.normal(0,1,100)  # y = 2x + 1 + noise
+# Build model
+model = tf.keras.Sequential([tf.keras.layers.Dense(1, input_shape=(1,))])
+model.compile(optimizer='sgd', loss='mse')
+# Train
+model.fit(x, y, epochs=100, verbose=0)
+# Predict
+y_pred = model.predict(x)
+plt.scatter(x, y, label="Data")
+plt.plot(x, y_pred, color='red', label="Fitted Line")
+plt.legend()
+plt.title("Linear Regression")
+plt.show()

@@ -1,0 +1,29 @@
+def McCullochPitts(inputs,threshold):
+    if sum(inputs) >= threshold:
+        return 1
+    else:
+        return 0
+
+inputs = list(map(int, input("Enter binary values: \n[cough, high temprature, body pain] : ").split()))
+threshold = 2
+
+result = McCullochPitts(inputs, threshold)
+if result == 0:
+    print("No Fever")
+else:
+    print("Has Fever")
+#-------------------------------------
+def perceptron(symptoms,weights,bias):
+    weighted_sum=np.dot(symptoms,weights)+bias
+
+    if weighted_sum>=0: 
+        return 1
+    else:
+        return 0
+
+symptoms = np.array([1, 1]) 
+weights = np.array([0.5,0.5])
+bias = -0.7
+
+risk=perceptron(symptoms,weights,bias)
+print("At Risk ?","Yes" if risk==1 else "No")

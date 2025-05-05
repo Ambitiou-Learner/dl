@@ -1,9 +1,91 @@
-import gensim.downloader as api
-print("Loading FastText model...")
-model = api.load('fasttext-wiki-news-subwords-300') # ~1GB
-print("Model loaded successfully!")
-input_word = 'paris'
-similar_words = model.most_similar(input_word, topn=7)
-print(f"Top 7 words similar to '{input_word}':")
-for word in similar_words:
-print(word)
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Generate synthetic binary classification data
+np.random.seed(0)
+x = np.linspace(-10, 10, 100)
+y = (x > 0).astype(int)  # Label 1 if x > 0 else 0
+y = y + 0.1 * np.random.randn(*x.shape)  # Add slight noise
+
+# Reshape for TensorFlow
+x_train = x[:, np.newaxis]
+y_train = y[:, np.newaxis]
+
+# Build logistic regression model
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(1,), activation='sigmoid')  # sigmoid for logistic regression
+])
+
+# Compile model
+model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(x_train, y_train, epochs=100, verbose=0)
+
+# Predict probabilities
+y_pred = model.predict(x_train)
+
+# Plotting
+plt.scatter(x, y, label="Data")
+plt.plot(x, y_pred, color='red', label="Sigmoid Curve")
+plt.legend()
+plt.title("Logistic Regression")
+plt.xlabel("x")
+plt.ylabel("Predicted Probability")
+plt.show()
+#------------------------------------------------
+import pandas as pd
+import numpy as np
+import tensorflow as tf
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# Load dataset
+df = pd.read_csv('heart-disease.csv')
+
+# Preview data
+print(df.head())
+
+# Features and label
+X = df[['age', 'trestbps', 'chol']]  # age, blood pressure, cholesterol
+y = df['target']  # 0 = No heart disease, 1 = Heart disease
+
+# Split into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Normalize the features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Build the logistic regression model
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(3,), activation='sigmoid')  # 3 input features
+])
+
+# Compile the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(X_train, y_train, epochs=100,verbose=0)
+
+# Evaluate the model
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f"\nTest Accuracy: {accuracy:.2f}")
+
+
+#
+# Predict probabilities
+y_pred = model.predict(X_train)
+
+print(y_pred[:5])
+
+# # Predict on test data
+# y_pred_probs = model.predict(X_test)
+# y_pred_labels = (y_pred_probs > 0.5).astype(int)
+
+# # Print predictions
+# print("\nPredicted vs Actual:")
+# for i in range(10):
+#     print(f"Predicted: {y_pred_labels[i][0]}, Actual: {y_test.iloc[i]}")

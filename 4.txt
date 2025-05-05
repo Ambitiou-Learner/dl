@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate Dataset
+input_1 = np.random.randint(-20,20,1000)
+input_2 = np.random.randn(10,4) # for softmax
+
+# Step Activation Function
+def step_activation(inputs,threshold):
+  # formula for function 
+output = []
+for i in range(1000):
+    output.append(step_activation(input_1[i],threshold=0))
+output = sorted(output)
+plt.plot(output)
+#-------------------------------
+def softmax(x):
+  x_stable = x - np.max(x) # we do this to prevent overflow error
+  exp = np.exp(x_stable)
+  return exp/np.sum(exp)
+
+input_2 = np.random.randn(10,4) # this generate 10 rows with 4 values in each (list of lists)
+output = []
+for i in range(10):
+    output.append(softmax(input_2[i]))
+output = np.array(output)
+# Plot each class probability across 1000 samples
+plt.plot(output[:, 0], label="Class 1")
+plt.plot(output[:, 1], label="Class 2")
+plt.plot(output[:, 2], label="Class 3")
+plt.plot(output[:, 3], label="Class 4")
+plt.xlabel("Index")
+plt.ylabel("Probability")
+plt.legend()
+plt.show()

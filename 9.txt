@@ -1,0 +1,54 @@
+# CNN
+import cv2
+import numpy as np
+import scipy.signal
+import matplotlib.pyplot as plt
+def convert_to_grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Laplacian-like filter
+filter = [[0, -1, 0],
+          [-1, 4, -1],
+          [0, -1, 0]]
+def apply_filter(image, filter):
+    filtered_image = scipy.signal.convolve2d(image, filter, mode='valid')
+    return np.clip(filtered_image, 0, 255).astype(np.uint8)
+image = cv2.imread("/content/image.jpg")
+
+# Convert and apply filter
+gray = convert_to_grayscale(image)
+filtered = apply_filter(gray, filter)
+
+# Convert BGR to RGB for proper color display in matplotlib
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+plt.imshow(image_rgb) # Original
+plt.show()
+plt.imshow(gray,cmap='gray')      # grayscale
+plt.show()
+plt.imshow(filtered)  # filtered
+plt.show()
+#-------------------------------------------ResNet 50
+from tensorflow.keras.applications import ResNet50
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
+import numpy as np
+
+# Load pre-trained ResNet50 model
+model = ResNet50(weights='imagenet')
+
+# Load and preprocess the image
+img_path = '/content/image.jpg'
+img = image.load_img(img_path, target_size=(224, 224))  # Resize image to 224x224
+img_array = image.img_to_array(img)  # Convert image to a numpy array
+img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension (1,)
+img_array = preprocess_input(img_array)  # Preprocess image for ResNet50
+
+# Predict the class probabilities
+predictions = model.predict(img_array)
+
+# Decode the top 3 predictions into readable labels
+decoded_predictions = decode_predictions(predictions, top=3)[0]
+
+# Print out the predictions
+for pred in decoded_predictions:
+    print(f"{pred[1]} ({pred[2]})") # 1 -> label, 2 -> score
