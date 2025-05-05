@@ -1,0 +1,37 @@
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.feature_extraction.text import TfidfVectorizer
+from keras.models import Model
+from keras.layers import Input, Dense
+# Sample text data (replace this with your own corpus)
+corpus = [
+"The cat sat on the mat.",
+"The dog sat on the log.",
+"The mouse ran across the floor.",
+"Cats and dogs are great pets.",
+"The quick brown fox jumps over the lazy dog."
+]
+# Step 1: Create the TF-IDF matrix from the corpus
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(corpus)
+# Step 2: Normalize the TF-IDF matrix using MinMaxScaler
+scaler = MinMaxScaler()
+tfidf_scaled = scaler.fit_transform(tfidf_matrix.toarray())
+# Step 3: Define the Autoencoder model
+def autoencoder_model(input_dim):
+input_layer = Input(shape=(input_dim,))
+encoded = Dense(256, activation='relu')(input_layer)
+encoded = Dense(128, activation='relu')(encoded)
+decoded = Dense(256, activation='relu')(encoded)
+output_layer = Dense(input_dim, activation='sigmoid')(decoded)
+autoencoder = Model(input_layer, output_layer)
+autoencoder.compile(optimizer='adam', loss='mse')
+return autoencoder
+# Step 4: Build and train the autoencoder
+autoencoder = autoencoder_model(tfidf_scaled.shape[1])
+autoencoder.fit(tfidf_scaled, tfidf_scaled, epochs=10, batch_size=32, verbose=1)
+# Step 5: Encode and reconstruct the data
+reconstructed = autoencoder.predict(tfidf_scaled)
+# Step 6: Display the original and reconstructed vector for the first sample
+print("Original Vector (first 10 values):", tfidf_scaled[0][:10])
+print("Reconstructed Vector (first 10 values):", reconstructed[0][:10])
