@@ -1,0 +1,9 @@
+: import gensim.downloader as api
+print("Loading Word2Vec model...")
+model = api.load('word2vec-google-news-300')
+print("Model loaded successfully!")
+input_word = 'king'
+similar_words = model.most_similar(input_word, topn=7)
+print(f"Top 7 words similar to '{input_word}':")
+for word, similarity in similar_words:
+print(word)
