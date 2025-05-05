@@ -1,0 +1,20 @@
+def forward_propagation(model, input_data):
+return model(input_data)
+sample_input = tf.convert_to_tensor(X_test[:5], dtype=tf.float32)
+predictions = forward_propagation(model, sample_input)
+model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.2)
+test_loss, test_mae = model.evaluate(X_test, y_test)
+print(f'Test Loss: {test_loss}, Test MAE: {test_mae}')
+predictions = model.predict(X_test)
+comparison_df = pd.DataFrame({'Actual': y_test, 'Predicted': predictions.
+↪flatten()})
+print(comparison_df.head())
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10, 6))
+plt.scatter(y_test, predictions, alpha=0.5)
+plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--') #␣
+↪Line for perfect predictions
+plt.xlabel('Actual Prices')
+plt.ylabel('Predicted Prices')
+plt.title('Actual vs Predicted House Prices')
+plt.show()
