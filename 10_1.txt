@@ -1,0 +1,17 @@
+import nltk
+import string
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Download necessary NLTK datasets
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+
+# Sample text
+text = "Hello! This is a sample text with some stopwords, punctuation, and more."
+
+# Remove punctuation
+punctuations = string.punctuation
+text_no_punctuation = ''.join([char for char in text if char not in punctuations])
+
+
