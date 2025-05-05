@@ -1,0 +1,24 @@
+# Normalize the features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+# Build the logistic regression model
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(3,), activation='sigmoid')  # 3 input features])
+# Compile the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+# Train the model
+model.fit(X_train, y_train, epochs=100,verbose=0)
+# Evaluate the model
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f"\nTest Accuracy: {accuracy:.2f}")
+# Predict probabilities
+y_pred = model.predict(X_train)
+print(y_pred[:5])
+# # Predict on test data
+# y_pred_probs = model.predict(X_test)
+# y_pred_labels = (y_pred_probs > 0.5).astype(int)
+# # Print predictions
+# print("\nPredicted vs Actual:")
+# for i in range(10):
+#     print(f"Predicted: {y_pred_labels[i][0]}, Actual: {y_test.iloc[i]}")
