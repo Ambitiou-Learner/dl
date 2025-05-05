@@ -1,0 +1,13 @@
+# Sigmoid Activation Function
+
+def sigmoid(x):
+    return 1/(1+np.exp(-x))
+
+output = []
+for i in range(1000):
+    output.append(sigmoid(input_1[i]))
+
+output = sorted(output)
+
+# PLotting
+plt.plot(output)
