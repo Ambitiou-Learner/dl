@@ -1,0 +1,2 @@
+similar_words = model.most_similar('France', topn=7)
+print(similar_words)
