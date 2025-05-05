@@ -1,0 +1,13 @@
+# Leaky Relu Activation function
+
+def leakyRelu(x):
+    return np.maximum(0.1*x,x) # instead of 0, just write 0.1 * x
+
+output = []
+
+for i in range(1000):
+    output.append(leakyRelu(input_1[i]))
+
+output = sorted(output)
+
+plt.plot(output)
