@@ -1,0 +1,11 @@
+
+# Build logistic regression model
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(1,), activation='sigmoid')  # sigmoid for logistic regression
+])
+
+# Compile model
+model.compile(optimizer='sgd', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(x_train, y_train, epochs=100, verbose=0)
