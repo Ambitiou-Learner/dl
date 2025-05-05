@@ -1,0 +1,13 @@
+# ReLU activation function
+
+def relu(x):
+    return np.maximum(x, 0)
+
+output = []
+
+for i in range(1000):
+    output.append(relu(input_1[i]))
+
+output = sorted(output)
+
+plt.plot(output)
