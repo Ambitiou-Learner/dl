@@ -1,0 +1,8 @@
+9_1-9.5
+import cv2
+import numpy as np
+import scipy.signal
+import matplotlib.pyplot as plt
+
+def convert_to_grayscale(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
