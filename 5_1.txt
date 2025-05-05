@@ -1,0 +1,13 @@
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+# Generate synthetic binary classification data
+np.random.seed(0)
+x = np.linspace(-10, 10, 100)
+y = (x > 0).astype(int)  # Label 1 if x > 0 else 0
+y = y + 0.1 * np.random.randn(*x.shape)  # Add slight noise
+
+# Reshape for TensorFlow
+x_train = x[:, np.newaxis]
+y_train = y[:, np.newaxis]
