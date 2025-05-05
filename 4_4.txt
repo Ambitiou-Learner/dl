@@ -1,0 +1,12 @@
+# Tanh Activation function
+
+def tanh(x):
+    return (np.exp(x) - np.exp(-x))/(np.exp(x) + np.exp(-x))
+
+output = []
+for i in range(1000):
+    output.append(tanh(input_1[i]))
+
+output = sorted(output)
+
+plt.plot(output)
