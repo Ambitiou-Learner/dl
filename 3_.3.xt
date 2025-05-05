@@ -1,0 +1,5 @@
+# Forward Propogation
+
+# Layer 1 (Hidden)
+Z1 = np.dot(weights[0], A0) + bias[0]
+A1 = tanh(Z1)  # print
