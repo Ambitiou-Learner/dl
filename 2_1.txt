@@ -1,0 +1,6 @@
+def McCullochPitts(inputs,threshold):
+    if sum(inputs) >= threshold:
+        return 1
+    else:
+        return 0
+
