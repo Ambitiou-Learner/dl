@@ -1,0 +1,8 @@
+1, 1.1.2.3, 2, 2.1.2.3, 3, 3.1.2.3,
+4, 4.1.2.3.4.5.6.7.8.9, 5, 6, 7, 7.1.2.3.4.5.6,
+8, 9 , 9.1.2.3.4
+and_gate, auto_encoder, extract_sentance, fast_text
+fastest_analogy,filter, forward_propagation, matrix_mul,
+nn_model, paragraph_to_sentence, stopword_punctuation, subword, 
+tf_idf, top_7, train_word2vecotor, word2Vector, word2vector,
+word2vector_analogy,cnn_with_pool

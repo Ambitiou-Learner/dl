@@ -1,0 +1,31 @@
+import numpy as np
+from scipy.signal import convolve2d
+import cv2
+
+# Create a dummy grayscale image
+image = np.random.rand(28, 28)
+
+# Define a simple 3x3 edge detection kernel
+kernel = np.array([
+    [-1, 0, 1],
+    [-2, 0, 2],
+    [-1, 0, 1]
+])
+
+# Apply convolution with 'same' padding
+convolved = convolve2d(image, kernel, mode='same', boundary='fill', fillvalue=0)
+print("After convolution:", convolved.shape)
+
+# Apply ReLU manually
+relu = np.maximum(convolved, 0)
+
+# Max Pooling 2x2 with stride=2
+def max_pool_2d(img, size=2):
+    pooled = np.zeros((img.shape[0]//size, img.shape[1]//size))
+    for i in range(0, img.shape[0] - size + 1, size):
+        for j in range(0, img.shape[1] - size + 1, size):
+            pooled[i//size, j//size] = np.max(img[i:i+size, j:j+size])
+    return pooled
+
+pooled = max_pool_2d(relu)
+print("After pooling:", pooled.shape)
