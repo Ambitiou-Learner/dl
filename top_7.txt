@@ -1,2 +1,37 @@
-similar_words = model.most_similar('France', topn=7)
-print(similar_words)
+from gensim.models import Word2Vec, FastText
+from nltk.tokenize import word_tokenize
+import nltk
+
+# Download tokenizer data
+nltk.download('punkt')
+
+# === YOUR OWN TEXT DATA ===
+text = """
+France is a country in Europe.
+Paris is the capital of France.
+Germany shares a border with France.
+Berlin is the capital of Germany.
+Spain is also in Europe.
+Madrid is the capital of Spain.
+"""
+
+# === TOKENIZATION ===
+sentences = [word_tokenize(sent.lower()) for sent in text.strip().split('\n') if sent]
+
+# === TRAIN WORD2VEC MODEL ===
+w2v_model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
+
+# === TOP 7 SIMILAR WORDS USING WORD2VEC ===
+print("\nTop 7 similar words to 'france' using Word2Vec:")
+similar_words_w2v = w2v_model.wv.most_similar('france', topn=7)
+for word, score in similar_words_w2v:
+    print(f"{word}: {score:.4f}")
+
+# === TRAIN FASTTEXT MODEL ===
+ft_model = FastText(sentences, vector_size=100, window=5, min_count=1, workers=4)
+
+# === TOP 7 SIMILAR WORDS USING FASTTEXT ===
+print("\nTop 7 similar words to 'france' using FastText:")
+similar_words_ft = ft_model.wv.most_similar('france', topn=7)
+for word, score in similar_words_ft:
+    print(f"{word}: {score:.4f}")
