@@ -1,0 +1,31 @@
+from gensim.models import FastText
+from nltk.tokenize import word_tokenize, sent_tokenize
+import nltk
+import numpy as np
+
+# Download tokenizer data
+nltk.download('punkt')
+
+# === SAMPLE PARAGRAPH ===
+paragraph = """
+France is a country in Europe. Paris is the capital of France.
+Germany shares a border with France. Berlin is the capital of Germany.
+Spain is in Europe too. Madrid is the capital of Spain.
+"""
+
+# === SENTENCE TOKENIZATION ===
+sentences = sent_tokenize(paragraph)
+tokenized_sentences = [word_tokenize(sent.lower()) for sent in sentences]
+
+# === TRAIN FASTTEXT MODEL ===
+model = FastText(tokenized_sentences, vector_size=100, window=5, min_count=1, workers=4)
+
+# === CONVERT EACH SENTENCE TO VECTOR ===
+def sentence_vector(sentence_tokens, model):
+    vectors = [model.wv[word] for word in sentence_tokens if word in model.wv]
+    return np.mean(vectors, axis=0) if vectors else np.zeros(model.vector_size)
+
+print("\nSentence vectors (using FastText subword embeddings):")
+for idx, sentence_tokens in enumerate(tokenized_sentences):
+    vec = sentence_vector(sentence_tokens, model)
+    print(f"Sentence {idx+1} vector shape: {vec.shape}")
