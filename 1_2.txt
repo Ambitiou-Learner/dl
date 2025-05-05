@@ -1,0 +1,5 @@
+def McCullochPittsNeuronAND(inputs):
+  if inputs.count(1) == len(inputs): # Check if the total count of "1" = len(inputs)....i.e. All values are "1"
+    return 1
+  else:
+    return 0
