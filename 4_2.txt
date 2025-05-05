@@ -1,0 +1,14 @@
+# Step Activation Function
+def step_activation(inputs,threshold):
+  if inputs >= threshold:
+    return 1
+  else:
+    return 0
+
+output = []
+for i in range(1000):
+    output.append(step_activation(input_1[i],threshold=0))
+output = sorted(output)
+
+# PLotting
+plt.plot(output)
